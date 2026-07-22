@@ -1,0 +1,30 @@
+{
+  "name": "@bundlab/ai-powered-devtools",
+  "version": "1.0.0",
+  "description": "Next-generation code quality, performance, and security analysis engine for TypeScript and JavaScript.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "devtools",
+    "code-analysis",
+    "static-analysis",
+    "security",
+    "performance",
+    "typescript"
+  ],
+  "author": "bundlab",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  }
+}
