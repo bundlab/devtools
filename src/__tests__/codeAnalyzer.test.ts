@@ -1,0 +1,10 @@
+import { CodeAnalyzer } from '../analyzer/codeAnalyzer';\nimport { CodeFile } from '../types';\n\ndescribe('CodeAnalyzer', () => {\n  let analyzer: CodeAnalyzer;\n\n  beforeEach(() => {\n    analyzer = new CodeAnalyzer();\n  });\n\n  it('should detect console.log statements', () => {\n    const file: CodeFile = {\n      path: 'src/app.ts',\n      content: 'function test() { console.log(\"test\"); }',\n      language: 'typescript'\n    };\n\n    const result = analyzer.analyzeCode(file);\n    expect(result.issues.length).toBeGreaterThan(0);\n  });\n\n  it('should calculate score', () => {\n    const file: CodeFile = {\n      path: 'src/app.ts',\n      content: 'const x = 10;',\n      language: 'typescript'\n    };\n\n    const result = analyzer.analyzeCode(file);\n    expect(result.score).toBeGreaterThanOrEqual(0);\n    expect(result.score).toBeLessThanOrEqual(100);\n  });\n});\n"
+  },
+  {
+    "path": "src/__tests__/securityAnalyzer.test.ts",
+    "owner": "bundlab",
+    "repo": "ai-powered-devtools",
+    "message": "Add security analyzer tests",
+    "content": "import { SecurityAnalyzer } from '../analyzer/securityAnalyzer';\nimport { CodeFile } from '../types';\n\ndescribe('SecurityAnalyzer', () => {\n  let analyzer: SecurityAnalyzer;\n\n  beforeEach(() => {\n    analyzer = new SecurityAnalyzer();\n  });\n\n  it('should detect eval usage', () => {\n    const file: CodeFile = {\n      path: 'src/app.ts',\n      content: 'const result = eval(userInput);',\n      language: 'typescript'\n    };\n\n    const report = analyzer.analyzeSecurity(file);\n    expect(report.vulnerabilities.some(v => v.id === 'SEC001')).toBe(true);\n  });\n\n  it('should calculate risk score', () => {\n    const file: CodeFile = {\n      path: 'src/app.ts',\n      content: 'const data = eval(input);',\n      language: 'typescript'\n    };\n\n    const report = analyzer.analyzeSecurity(file);\n    expect(report.riskScore).toBeGreaterThan(0);\n  });\n});\n"
+  }
+]
